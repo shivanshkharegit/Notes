@@ -46,6 +46,20 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
 
+        #searchBar {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 1em;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            outline: none;
+            background-color: #ffffff;
+            color: #1e293b;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        
         .topic-card a {
             text-decoration: none;
             color: #192a56;
@@ -76,19 +90,23 @@
         Notes By Hello Buggy
     </header>
 
+<div class="container">
+        <!-- Search Bar -->
+        <input type="text" id="searchBar" placeholder="Search for topics or keywords...">
+    
     <div class="container">
-        <div class="topic-card">
+        <div class="topic-card" data-keywords="java identifiers  syntax rules naming">
             <a href="pdfs\Java_Identifiers.pdf" target="_blank"> Java_Identifiers</a>
             <a class="download-btn" href="pdfs\Java_Identifiers.pdf" download>Download</a>
         </div>
-        <div class="topic-card">
+        <div class="topic-card" data-keywords="keywords reserved words">
             <a href="pdfs\Keywords_in_Java.pdf" target="_blank">Keywords_in_Java</a>
             <a class="download-btn" href="pdfs\Keywords_in_Java.pdf" download>Download</a>
-       <!-- </div>
-        <div class="topic-card">
-            <a href="pdfs/Arrays_Strings.pdf" target="_blank">Arrays & Strings</a>
-            <a class="download-btn" href="pdfs/Arrays_Strings.pdf" download>Download</a>
-        </div>
+       </div>
+        <div class="topic-card" data-keywords="data Types Data primitive reference">
+             <a href="pdfs\Data_Types.pdf" target="_blank">Data Types(JAVA)</a>
+            <a class="download-btn" href="pdfs\Data_Types.pdf" download>Download</a>
+      <!--  </div>
         <div class="topic-card">
             <a href="pdfs/Inheritance_Polymorphism.pdf" target="_blank">Inheritance & Polymorphism</a>
             <a class="download-btn" href="pdfs/Inheritance_Polymorphism.pdf" download>Download</a>
@@ -104,6 +122,19 @@
     </a>
 </footer>
 
+         <script>
+        const searchBar = document.getElementById('searchBar');
+        const cards = document.querySelectorAll('.topic-card');
 
+        searchBar.addEventListener('keyup', () => {
+            const query = searchBar.value.toLowerCase();
+            cards.forEach(card => {
+                const title = card.querySelector('a').textContent.toLowerCase();
+                const keywords = card.getAttribute('data-keywords').toLowerCase();
+                card.style.display = (title.includes(query) || keywords.includes(query)) ? 'block' : 'none';
+            });
+        });
+    </script>
+        
 </body>
 </html>
